@@ -48,10 +48,68 @@ class Agent{
         this.controller = { //Список действий, которые должен выполнить агент
             acts: [
                 {act: "flag", fl: "fplt"},
-                {act: "flag", fl: "flb"},
+                {act: "flag", fl: "fcb"},
                 {act: "kick", fl: "b", goal: "gr"}
             ],
             currentAct: 0,
+            processing(agent, flags, p) {
+                let controllerStep = this.acts[this.currentAct];
+                if (controllerStep.act === "flag") {
+                    var flagNumber = agent.checkThatWeSeeFlag(flags, controllerStep.fl);
+                    if (flagNumber === -1
+                        ||  (Math.abs(flags[flagNumber].direction) >= 1)
+                    ) {
+                        if (flagNumber !== -1) {
+                            if (flags[flagNumber].direction > 0) {
+                                agent.turnSpeed = 5;
+                            } else {
+                                agent.turnSpeed = -5;
+                            }
+                            agent.socketSend("turn", flags[flagNumber].direction);
+                        } else {
+                            agent.socketSend("turn", agent.turnSpeed)
+                        }
+                    } else {
+                        if (flags[flagNumber].distance <= 3.0) {
+                            agent.socketSend("dash", `0`);
+                            agent.controller.currentAct++;
+                        } else {
+                            agent.socketSend("dash", `80`);
+                        }
+                    }
+                } else if (controllerStep.act === "kick") {
+                    var seeBall = agent.getSeeBall(p);
+                    if (seeBall == null) {
+                        agent.socketSend("turn", agent.turnSpeed);
+                        return;
+                    }
+
+                    if (Math.abs(seeBall.direction) >= 1) {
+                        agent.socketSend("turn", seeBall.direction);
+                        return;
+                    }
+
+                    if (Math.abs(seeBall.distance) >= 0.5) {
+                        agent.speed = 80;
+                        agent.socketSend("dash", agent.speed);
+                        return;
+                    } else {
+                        if (agent.speed > 0) {
+                            agent.speed = 0;
+                            agent.socketSend("dash", agent.speed);
+                            return;
+                        }
+
+                    }
+
+                    flagNumber = agent.checkThatWeSeeFlag(flags, controllerStep.goal);
+                    if (flagNumber !== -1) {
+                        agent.socketSend("kick", `100 ` + flags[flagNumber].direction);
+                    } else {
+                        agent.socketSend("kick", `10 45`);
+                    }
+                }
+            }
         };
         this.rl = readline.createInterface({  //Чтение консоли
             input: process.stdin,
@@ -104,6 +162,7 @@ class Agent{
         if(data.cmd === "hear" && data.msg.includes("play_on")) this.run = true;
         if (data.cmd === "hear" && data.msg.includes("goal")) {
             this.controller.currentAct = 0;
+            this.run = false;
         }
         if(data.cmd === "init") this.initAgent(data.p); //Инициализация
         this.analyzeEnv(data.msg, data.cmd, data.p); //Обработка
@@ -115,66 +174,7 @@ class Agent{
     analyzeEnv(msg, cmd, p){  //Анализ сообщения (TODO)
         if (cmd === "see" && this.run && this.isMoved) {
             let flags = this.getAllSeeFlags(p);
-
-            let controllerStep = this.controller.acts[this.controller.currentAct];
-            if (controllerStep.act === "flag") {
-                var flagNumber = this.checkThatWeSeeFlag(flags, controllerStep.fl);
-                if (flagNumber === -1
-                    ||  (Math.abs(flags[flagNumber].direction) >= 1)
-                ) {
-                    if (flagNumber !== -1) {
-                        if (flags[flagNumber].direction > 0) {
-                            this.turnSpeed = 5;
-                        } else {
-                            this.turnSpeed = -5;
-                        }
-                        this.socketSend("turn", flags[flagNumber].direction);
-                    } else {
-                        this.socketSend("turn", this.turnSpeed)
-                    }
-                } else {
-                    // var distance = Flags.distance(this.coord, Flags[controllerStep.fl]);
-                    if (flags[flagNumber].distance <= 3.0) {
-                        this.socketSend("dash", `0`);
-                        this.controller.currentAct++;
-                    } else {
-                        this.socketSend("dash", `80`);
-                    }
-                    this.coord = null;
-                }
-            } else if (controllerStep.act === "kick") {
-                var seeBall = this.getSeeBall(p);
-                if (seeBall == null) {
-                    this.socketSend("turn", this.turnSpeed);
-                    return;
-                }
-
-                if (Math.abs(seeBall.direction) >= 1) {
-                    this.socketSend("turn", seeBall.direction);
-                    return;
-                }
-
-                if (Math.abs(seeBall.distance) >= 0.5) {
-                    this.speed = 80;
-                    this.socketSend("dash", this.speed);
-                    return;
-                } else {
-                    if (this.speed > 0) {
-                        this.speed = 0;
-                        this.socketSend("dash", this.speed);
-                        return;
-                    }
-
-                }
-
-                flagNumber = this.checkThatWeSeeFlag(flags, controllerStep.goal);
-                if (flagNumber !== -1) {
-                    this.socketSend("kick", `100 ` + flags[flagNumber].direction);
-                } else {
-                    this.socketSend("kick", `10 45`);
-                }
-            }
-
+            this.controller.processing(this, flags, p);
         }
     }
 

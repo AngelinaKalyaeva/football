@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="14f2bb5b-a3e9-4f2b-9099-162ae89362a6" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1oeROjw6nKjlm8rsD01UjMPKA7f" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="10.16.3" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ангелина\Documents\лабораторные работы\8 семестр\интеллектуальные системы\common\lab3" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="14f2bb5b-a3e9-4f2b-9099-162ae89362a6" name="Default Changelist" comment="" />
+      <created>1613645040059</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1613645040059</updated>
+      <workItem from="1613645044720" duration="5368000" />
+      <workItem from="1613658578702" duration="186000" />
+      <workItem from="1613658868696" duration="10710000" />
+      <workItem from="1614181709761" duration="17022000" />
+      <workItem from="1614251068503" duration="5807000" />
+      <workItem from="1614260473819" duration="3275000" />
+      <workItem from="1614286821259" duration="1455000" />
+      <workItem from="1614318684347" duration="2034000" />
+      <workItem from="1614601716655" duration="15226000" />
+      <workItem from="1614786278446" duration="11042000" />
+      <workItem from="1614853915141" duration="27385000" />
+      <workItem from="1614891054013" duration="3220000" />
+      <workItem from="1614924100074" duration="1460000" />
+      <workItem from="1615194295144" duration="5540000" />
+      <workItem from="1615459682079" duration="3967000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>

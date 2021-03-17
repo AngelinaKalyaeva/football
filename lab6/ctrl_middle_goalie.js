@@ -53,7 +53,7 @@ const CTRL_MIDDLE_GOALIE = {
         return {n: "turn", v: 180}
     },
     rotateCenter(takenState) { // Повернуться к центру
-        if(!takenState.flags["fc"]) {
+        if(takenState.flags === undefined || takenState.flags["fc"] === undefined || !takenState.flags["fc"]) {
             return {n: "turn", v: 60};
         }
 

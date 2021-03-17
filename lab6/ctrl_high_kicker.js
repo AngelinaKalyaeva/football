@@ -24,10 +24,10 @@ const CTRL_HIGH_HALFBACK = {
                 return {n: "kick", v: `110 ${takenState.goal.angle}`};
             }
 
-            return {n: "kick", v: `10 45`}
+            return {n: "kick", v: `10 ${this.side === "l" ? -45 : 45}`}
         }
     },
-    defendGoal(takenState) { // Защита ворот
+    defendGoal(takenState) {
         this.last = "defend";
 
         if(takenState.ball && takenState.ball.dist) {

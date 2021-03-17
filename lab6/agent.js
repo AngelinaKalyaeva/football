@@ -30,30 +30,6 @@ class Agent {
         this.x = x;
         this.y = y;
         this.isMoved = false;
-
-        // this.rl = readline.createInterface({  //Чтение консоли
-        //     input: process.stdin,
-        //     output: process.stdout
-        // });
-        // this.rl.on('line', (input) => {//Обработка строки из консоли
-        //     if (!this.run && !this.isMoved) {
-        //         var coords = input.split(" ");
-        //
-        //         if (isNaN(coords[0]) || isNaN(coords[1])) {
-        //             console.log("Неверный формат параметров.");
-        //             return;
-        //         }
-        //
-        //         var x = parseInt(coords[0]);
-        //         var y = parseInt(coords[1]);
-        //
-        //
-        //         this.socketSend("move", x + " " + y);
-        //
-        //         console.log("Стартовые параметры заданы x: %s, y: %s", x, y);
-        //     }
-        //
-        // })
     }
 
     msgGot(msg) { //Получение сообещения

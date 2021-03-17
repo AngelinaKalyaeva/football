@@ -73,7 +73,7 @@ const CTRL_HIGH_GOALIE = {
                 }
             }
 
-            if(!isRivalClosest && isActionArea) {
+            if((takenState.ball.dist < 7) || (!isRivalClosest && isActionArea)) {
                 if(Math.abs(takenState.ball.angle) > 5) {
                     return {n: "turn", v: takenState.ball.angle};
                 }

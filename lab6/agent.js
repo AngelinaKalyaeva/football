@@ -14,7 +14,7 @@ const ctrlMediumKicker = require("./ctrl_middle_kicker");
 const ctrlHighKicker = require("./ctrl_high_kicker");
 
 class Agent {
-    constructor(teamName, playerType, flag) {
+    constructor(teamName, playerType, flag, x, y) {
         this.position = "l"; //По умолчанию - левая половина поля
         this.run = false; //Игра начата
         this.isMoved = false;
@@ -27,30 +27,33 @@ class Agent {
         this.teamName = teamName;
         this.flag = flag;
         this.act = null; //Действия
+        this.x = x;
+        this.y = y;
+        this.isMoved = false;
 
-        this.rl = readline.createInterface({  //Чтение консоли
-            input: process.stdin,
-            output: process.stdout
-        });
-        this.rl.on('line', (input) => {//Обработка строки из консоли
-            if (!this.run && !this.isMoved) {
-                var coords = input.split(" ");
-
-                if (isNaN(coords[0]) || isNaN(coords[1])) {
-                    console.log("Неверный формат параметров.");
-                    return;
-                }
-
-                var x = parseInt(coords[0]);
-                var y = parseInt(coords[1]);
-
-                this.isMoved = true;
-                this.socketSend("move", x + " " + y);
-
-                console.log("Стартовые параметры заданы x: %s, y: %s", x, y);
-            }
-
-        })
+        // this.rl = readline.createInterface({  //Чтение консоли
+        //     input: process.stdin,
+        //     output: process.stdout
+        // });
+        // this.rl.on('line', (input) => {//Обработка строки из консоли
+        //     if (!this.run && !this.isMoved) {
+        //         var coords = input.split(" ");
+        //
+        //         if (isNaN(coords[0]) || isNaN(coords[1])) {
+        //             console.log("Неверный формат параметров.");
+        //             return;
+        //         }
+        //
+        //         var x = parseInt(coords[0]);
+        //         var y = parseInt(coords[1]);
+        //
+        //
+        //         this.socketSend("move", x + " " + y);
+        //
+        //         console.log("Стартовые параметры заданы x: %s, y: %s", x, y);
+        //     }
+        //
+        // })
     }
 
     msgGot(msg) { //Получение сообещения
@@ -83,6 +86,8 @@ class Agent {
     }
 
     initAgent(p) {
+        this.socketSend("move", this.x + " " + this.y);
+        this.isMoved = true;
         if (p[0] === "r") this.position = "r"; //Правая половина поля
         if (p[1]) this.id = p[1]; //id игрока
 

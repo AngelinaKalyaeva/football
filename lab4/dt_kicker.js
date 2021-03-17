@@ -166,7 +166,7 @@ const DT_FLAGS = {
     },
     ballGoalVisible: {
         exec (state) { state.command =
-            {n: "kick", v: `80 ${commandManager.getAngle(state.action.goal)}`}},
+            {n: "kick", v: `100 ${commandManager.getAngle(state.action.goal)}`}},
         next: "sendCommand",
     },
     ballGoalInvisible: {

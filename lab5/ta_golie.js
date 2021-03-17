@@ -108,7 +108,7 @@ const TA = {
             state.next = false;
             let goalOwn = taken.goalOwn;
             if (!goalOwn) return {n: "turn", v: 60};
-            if (Math.abs(goalOwn.angle) > 10)
+            if (Math.abs(goalOwn.angle) > 2)
                 return {n: "turn", v: goalOwn.angle};
             if (goalOwn.dist < 2) {
                 state.next = true;
@@ -152,7 +152,8 @@ const TA = {
                         n: "turn", v: -60
                     };
                 default:
-                    state.next = true
+                    state.next = true;
+                    return {n: "turn", v: taken.lookAroundFlags.fprc.angle};
             }
         },
         canIntercept(taken, state) { // Можем добежать первыми
@@ -165,8 +166,8 @@ const TA = {
                     let degrees = Math.sign(rival.angle) === Math.sign(ball.angle)
                         ? Math.max(Math.abs(rival.angle), Math.abs(ball.angle)) - Math.min(Math.abs(rival.angle), Math.abs(rival.angle))
                         : Math.abs(rival.angle) + Math.abs(ball.angle);
-                    const enemyDistanceToBall = Math.sqrt(rival.dist ** 2 + ball.dist ** 2 - 2 * rival.dist * ball.dist * Math.cos(degrees * Math.PI / 180));
-                    return enemyDistanceToBall < ball.dist
+                    const rivalDistanceToBall = Math.sqrt(rival.dist ** 2 + ball.dist ** 2 - 2 * rival.dist * ball.dist * Math.cos(degrees * Math.PI / 180));
+                    return rivalDistanceToBall < ball.dist
                 });
                 return !rival;
             }

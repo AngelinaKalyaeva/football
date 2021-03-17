@@ -19,7 +19,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.16.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../lab5" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="settings.nodejs" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
@@ -66,6 +66,8 @@
       <workItem from="1614924100074" duration="1460000" />
       <workItem from="1615194295144" duration="5540000" />
       <workItem from="1615459682079" duration="3967000" />
+      <workItem from="1615488672036" duration="5016000" />
+      <workItem from="1615528429164" duration="827000" />
     </task>
     <servers />
   </component>
